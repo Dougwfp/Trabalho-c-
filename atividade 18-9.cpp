@@ -48,6 +48,20 @@ void print(Lista* lista)
 	}
 }
 
+double totalSalario(Lista* lista)
+{
+	Lista* aux;
+	aux = lista;
+	double sltotal = 0;
+	while (aux != NULL)
+	{
+
+		sltotal += aux->dado.salario;
+		aux = aux->prox;
+	}
+	return sltotal;
+}
+
 Lista* find(Lista* lista, int i)
 {
 	Lista* aux;
@@ -59,6 +73,8 @@ Lista* find(Lista* lista, int i)
 	if (aux == NULL)
 	{
 		aux = new Lista;
+		aux->dado.prontuario = -1;
+		aux->dado.nome = "";
 		aux->dado.prontuario = -1;
 		aux->prox = NULL;
 	}
@@ -125,16 +141,25 @@ int main(int argc, char** argv)
 	while (escolha != 0)
 	{
 		if(escolha == 1){
+		    int verificapront = 0;
 		    cout << "Inserir" << endl;
 		    cout << "digite o prontuario: " << endl;
-		    cin >> novoF.prontuario;
-		    cout << "digite o nome: " << endl;
-	        cin >> novoF.nome;
-	        cout << "digite o salario: " << endl;
-	        cin >> novoF.salario;
-	        minhaLista = insert(minhaLista, novoF);
-		    
-		    
+		    cin >> verificapront;
+		    Lista *procurado = find(minhaLista,verificapront); 
+	        if (procurado->dado.prontuario == verificapront)
+	        {
+  	            cout << "funcionario existente" << endl;
+	        }
+            else
+            {
+   	            novoF.prontuario = verificapront;
+   	            cout << "digite o nome: " << endl;
+	            cin >> novoF.nome;
+	            cout << "digite o salario: " << endl;
+	            cin >> novoF.salario;
+	            minhaLista = insert(minhaLista, novoF);
+            }
+		       
 		}
 		if(escolha == 2){
 		    
@@ -165,7 +190,8 @@ int main(int argc, char** argv)
 		}
 		if(escolha == 4){
 		    cout << "Listar" << endl;
-		    print(minhaLista);		    
+		    print(minhaLista);	
+		    cout << "total de salarios: " << totalSalario(minhaLista);
 		}
 		
 		cout << "0. Sair" << endl;
@@ -181,3 +207,4 @@ int main(int argc, char** argv)
 	
 	return 0;
 }
+
