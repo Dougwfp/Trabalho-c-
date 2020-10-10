@@ -74,6 +74,8 @@ int main(int argc, char** argv)
 	pilhaFloatPar = init();
 	Pilha *pilhaFloatImp;
 	pilhaFloatImp = init();
+	Pilha *pilhaFloatRev;
+	pilhaFloatRev = init();
 	int ultimoValor = 0;
 	int valorAtual = 0;
 	int contagem = 0;
@@ -111,13 +113,43 @@ int main(int argc, char** argv)
 
         contagem++;
     }
-	
-	cout << "------------------------" << endl;
+	cout << "Valores Normais: " << endl;	
+	print(pilhaFloat);
 	cout << "Valores Pares: " << endl;
 	print(pilhaFloatPar);
 	cout << "Valores Impares: " << endl;	
 	print(pilhaFloatImp);
-	
+	contagem = 0;
+	if(last(pilhaFloatPar) > last(pilhaFloatImp)){
+	    while(contagem < 15) {
+	        if(last(pilhaFloatPar) != 0){
+	            push(pilhaFloatRev,last(pilhaFloatPar));
+	            pop(pilhaFloatPar);
+	        }
+	        if(last(pilhaFloatImp) != 0){
+	            push(pilhaFloatRev,last(pilhaFloatImp));
+	            pop(pilhaFloatImp);
+	        }
+	        contagem++;
+	    }
+	    
+	}
+	else{
+	    while(contagem < 15) {
+            if(last(pilhaFloatImp) != 0){
+	            push(pilhaFloatRev,last(pilhaFloatImp));
+	            pop(pilhaFloatImp);
+	        }
+	        if(last(pilhaFloatPar) != 0){
+	            push(pilhaFloatRev,last(pilhaFloatPar));
+	            pop(pilhaFloatPar);
+	        }
+	        contagem++;
+	    }
+	    
+	}
+	cout << "Valores Reversos: " << endl;	
+	print(pilhaFloatRev);
 	freePilha(pilhaFloatPar);
 	freePilha(pilhaFloatImp);
 	
